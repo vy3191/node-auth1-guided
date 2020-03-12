@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const userModal = require('../users/users-model');
 
-function validation(req,res,next) {
+async function validation(req,res,next) {
    try{
      const user = userModal.findBy({username}).first();
      const {username, password} = req.headers;
