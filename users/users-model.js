@@ -1,6 +1,9 @@
-const db = require("../database/config")
+const db = require("../database/config");
+const brycpt = require('bcryptjs');
+
 
 async function add(user) {
+	user.password = await brycpt.hash(user.password,16);
 	const [id] = await db("users").insert(user)
 	return findById(id)
 }
