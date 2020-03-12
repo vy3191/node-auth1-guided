@@ -3,9 +3,9 @@ const userModal = require('../users/users-model');
 
 async function validation(req,res,next) {
    try{
-     const user = userModal.findBy({username}).first();
      const {username, password} = req.headers;
-
+     const user = await userModal.findBy({username}).first();
+       console.log(req.header);
      if(!username) res.status(401).json({msg:'User name is missing'});
      if(!password) res.status(401).json({msg:'Password is missing'});
      if(!user) res.status(401).json({msg:'User does not exis'});
