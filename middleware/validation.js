@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const userModal = require('../users/users-model');
+const session = {};
 
 async function validation(req,res,next) {
    try{
@@ -19,4 +20,4 @@ async function validation(req,res,next) {
    }
 }
 
-module.exports = validation;
+module.exports = {session,validation};
