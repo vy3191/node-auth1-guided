@@ -1,7 +1,7 @@
 const express = require("express")
 const Users = require("../users/users-model");
 const bcrypt = require('bcryptjs');
-
+const {session, validation} = require('../middleware/validation');
 const router = express.Router()
 
 router.post("/register", async (req, res, next) => {
@@ -31,7 +31,9 @@ router.post("/login", async (req, res, next) => {
 				message: "Invalid Credentials",
 			})
 		}
-
+		const authToken = Math.random();
+		session[authToken] = user.id;
+		res.setHeader('Authorization', authToken);
 		res.json({
 			message: `Welcome ${user.username}!`,
 		})
