@@ -15,7 +15,11 @@ server.use(session({
 	 name:'token', //overwrite the default cookie name, hides our stack 
 	 resave: false,
 	 saveUninitialized:false, // GDPR laws against setting cookies automatically.
-	 secret: "keep it secret it secret, keep it safe"
+	 secret: "keep it secret it secret, keep it safe",
+	 cookie: {
+		 maxAge: 15 * 1000,
+		 httpOnly: true,
+	 }
 
 }))
 

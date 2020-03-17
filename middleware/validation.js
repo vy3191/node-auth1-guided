@@ -19,11 +19,13 @@ async function validation(req,res,next) {
    //  if(!session[authorization]) {
    //     return res.status(401).json({msg:'Wrong credentials'});
    //  }
-   const { cookie } = req.headers;
-   if(!cookie) res.status(401).json({msg:'No authorized'});
+  //  const { cookie } = req.headers;
+  //  if(!cookie) res.status(401).json({msg:'No authorized'});
 
-   const authToken = cookie.replace("token=",'');
-   if(!session[authToken]) res.status(401).json({msg:'Not authorized now.'});
+  //  const authToken = cookie.replace("token=",'');
+  //  if(!session[authToken]) res.status(401).json({msg:'Not authorized now.'});
+
+     if(!req.session || !req.session.user) res.status(401).json({msg:'Not authorized'});
      next();
    }catch(err){
      next(err);
