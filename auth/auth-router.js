@@ -31,10 +31,11 @@ router.post("/login", async (req, res, next) => {
 				message: "Invalid Credentials",
 			})
 		}
-		const authToken = Math.random();
-		session[authToken] = user.id;
-		// res.setHeader('Authorization', authToken);
-		res.setHeader('Set-Cookie', `token=${authToken}; path=/`);
+		// const authToken = Math.random();
+		// session[authToken] = user.id;
+		// // res.setHeader('Authorization', authToken);
+		// res.setHeader('Set-Cookie', `token=${authToken}; path=/`);
+		req.session.user = user;
 		res.json({
 			message: `Welcome ${user.username}!`,
 		})
