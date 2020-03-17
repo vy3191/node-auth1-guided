@@ -33,7 +33,8 @@ router.post("/login", async (req, res, next) => {
 		}
 		const authToken = Math.random();
 		session[authToken] = user.id;
-		res.setHeader('Authorization', authToken);
+		// res.setHeader('Authorization', authToken);
+		res.setHeader('Set-Cookie', `token=${authToken}; path=/`);
 		res.json({
 			message: `Welcome ${user.username}!`,
 		})
