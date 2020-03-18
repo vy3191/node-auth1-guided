@@ -1,9 +1,11 @@
 const express = require("express");
 const session = require("express-session");
 const helmet = require("helmet")
+const dbConfig = require('./database/config');
 const cors = require("cors")
 const authRouter = require("./auth/auth-router")
-const usersRouter = require("./users/users-router")
+const usersRouter = require("./users/users-router");
+const KnexSessionStore = require("connect-session-knex")(session);
 
 const server = express()
 const port = process.env.PORT || 5000
@@ -17,9 +19,13 @@ server.use(session({
 	 saveUninitialized:false, // GDPR laws against setting cookies automatically.
 	 secret: "keep it secret it secret, keep it safe",
 	 cookie: {
-		 maxAge: 15 * 1000,
+		//  maxAge: 15 * 1000,
 		 httpOnly: true,
-	 }
+	 },
+	 store: new KnexSessionStore({
+		 knex: dbConfig, // configure instance of knex
+		 createtable:true, //If the session table doesn't exist, create it automatically
+	 })
 
 }))
 

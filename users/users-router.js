@@ -11,4 +11,16 @@ router.get("/", validation, async (req, res, next) => {
 	}
 })
 
+router.get("/logout", validation, (req,res,next) => {
+	  req.session.destroy( (err) => {
+			 if(err) {
+				 next(err);
+			 } else {
+				 res.json({
+					  message:"successfully logged out"
+				 })
+			 }
+		})
+});
+
 module.exports = router

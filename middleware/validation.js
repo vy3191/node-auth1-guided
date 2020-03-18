@@ -25,7 +25,9 @@ async function validation(req,res,next) {
   //  const authToken = cookie.replace("token=",'');
   //  if(!session[authToken]) res.status(401).json({msg:'Not authorized now.'});
 
-     if(!req.session || !req.session.user) res.status(401).json({msg:'Not authorized'});
+     if(!req.session || !req.session.user) {
+        return res.status(401).json({msg:'Not Authorized'});
+     }
      next();
    }catch(err){
      next(err);
